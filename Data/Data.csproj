@@ -50,6 +50,7 @@
     <Compile Include="Nodos.cs" />
     <Compile Include="Progresos.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReadGeneralData.cs" />
     <Compile Include="Recaudado.cs" />
     <Compile Include="Usuarios.cs" />
   </ItemGroup>

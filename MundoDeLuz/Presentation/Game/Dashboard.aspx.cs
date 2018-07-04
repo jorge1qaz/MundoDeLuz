@@ -44,7 +44,7 @@ namespace MundoDeLuz.Presentation.Game
             }
         }
 
-        public void FillData_PrincipalUser()
+        public void FillData_PrincipalUser_logros()
         {
             User userPrincipal = new User()
             {
