@@ -44,6 +44,7 @@
     <Compile Include="Categorias.cs" />
     <Compile Include="Connection.cs" />
     <Compile Include="CRUD\Category.cs" />
+    <Compile Include="CRUD\Node.cs" />
     <Compile Include="CRUD\Progress.cs" />
     <Compile Include="CRUD\User.cs" />
     <Compile Include="Niveles.cs" />
@@ -53,6 +54,9 @@
     <Compile Include="ReadGeneralData.cs" />
     <Compile Include="Recaudado.cs" />
     <Compile Include="Usuarios.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Exchange\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

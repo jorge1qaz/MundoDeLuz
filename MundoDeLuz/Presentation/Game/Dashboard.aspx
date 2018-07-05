@@ -42,18 +42,49 @@
                                         <table class="table">
                                             <tr>
                                                 <td><b>Próximo nivel: </b></td>
-                                                <td>2</td>
+                                                <td>
+                                                    <asp:Label ID="PUlblSiguienteNivel" runat="server"></asp:Label>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td><b>Actual colaboradores : </b></td>
-                                                <td>4</td>
+                                                <td>
+                                                    <asp:Label ID="PUlblCantidadColaboradores" runat="server"></asp:Label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" class="text-center">
+                                                    <h4>Dinero ganado: </h4>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <h4>Dinero ganado: </h4>
+                                                    <b>
+                                                        <asp:Label ID="GrlLblNombreNivel1" runat="server"></asp:Label>
+                                                    </b>
                                                 </td>
                                                 <td>
-                                                    <h3>S/ 350</h3>
+                                                    <asp:Label ID="PULblGananciaNivel1" runat="server" Text="Label"></asp:Label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <b>
+                                                        <asp:Label ID="GrlLblNombreNivel2" runat="server"></asp:Label>
+                                                    </b>
+                                                </td>
+                                                <td>
+                                                    <asp:Label ID="PULblGananciaNivel2" runat="server" Text="Label"></asp:Label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <b>
+                                                        <asp:Label ID="GrlLblNombreNivel3" runat="server"></asp:Label>
+                                                    </b>
+                                                </td>
+                                                <td>
+                                                    <asp:Label ID="PULblGananciaNivel3" runat="server" Text="Label"></asp:Label>
                                                 </td>
                                             </tr>
                                         </table>

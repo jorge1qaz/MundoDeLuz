@@ -350,6 +350,10 @@
     <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Business\Business.csproj">
+      <Project>{21AFB0BF-F646-47AF-8A81-012D0636CDE7}</Project>
+      <Name>Business</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Data\Data.csproj">
       <Project>{b5ec2280-dc00-4eb7-b49e-cea66761d5fc}</Project>
       <Name>Data</Name>

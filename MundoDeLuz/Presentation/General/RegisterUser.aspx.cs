@@ -1,4 +1,5 @@
-﻿using Data.CRUD;
+﻿using Data;
+using Data.CRUD;
 using System;
 
 namespace MundoDeLuz.Presentation.General
@@ -7,6 +8,14 @@ namespace MundoDeLuz.Presentation.General
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            ReadGeneralData readGeneralData = new ReadGeneralData();
+            if (!Page.IsPostBack)
+            {
+                lstBancos.DataSource        = readGeneralData.GetDataTable("Negocio_List_Banks");
+                lstBancos.DataValueField    = "IdBanco";
+                lstBancos.DataTextField     = "NombreBanco";
+                lstBancos.DataBind();
+            }
         }
 
         protected void Event_RegisterUser(object sender, EventArgs e)
