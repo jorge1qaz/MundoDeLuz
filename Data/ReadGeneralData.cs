@@ -70,7 +70,7 @@ namespace Data
             return value;
         }
 
-        public decimal GetSingleValueDECIMAL_ByTwoIds(string storedProcedure, string nameColumn1, string id1, string nameColumn2, Int16 id2)
+        public decimal GetSingleValueDECIMAL_3Ids(string storedProcedure, string nameColumn1, string id1, string nameColumn2, Int16 id2, string nameColumn3, Int16 id3)
         {
             decimal value;
             Connection connection   = new Connection();
@@ -90,6 +90,12 @@ namespace Data
             parameter2.ParameterName    = nameColumn2;
             parameter2.Value            = id2;
             sqlCommand.Parameters.Add(parameter2);
+
+            SqlParameter parameter3     = new SqlParameter();
+            parameter3.SqlDbType        = SqlDbType.SmallInt;
+            parameter3.ParameterName    = nameColumn3;
+            parameter3.Value            = id3;
+            sqlCommand.Parameters.Add(parameter3);
             
             connection.Connect();
             value   = (decimal)sqlCommand.ExecuteScalar(); // Devuelve el valor convertido explícitamente a string

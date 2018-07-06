@@ -2,21 +2,20 @@
 
 namespace Business
 {
-    public class PrincipalUser
+    [Serializable]
+    public class LowerNode
     {
-        public Int16 IdCategoria { get; set; }
+        public string NodoSuperior { get; set; }
 
-        public string IdUsuario { get; set; }
+        public Int16 IdCategoria { get; set; }
 
         public string Nombres { get; set; }
 
         public string Apellidos { get; set; }
 
-        public string NombreCategoria { get; set; }
-
         public string NombreNivel { get; set; }
 
-        public Int16 IdNivel { get; set; }
+        public decimal DineroAcumulado { get; set; }
 
         public Int16 Cantidad { get; set; }
     }

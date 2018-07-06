@@ -40,7 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Logic\LowerNodeData.cs" />
     <Compile Include="Logic\PrincipalUserData.cs" />
+    <Compile Include="LowerNode.cs" />
     <Compile Include="PrincipalUser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

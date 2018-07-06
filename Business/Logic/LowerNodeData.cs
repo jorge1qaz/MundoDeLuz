@@ -1,16 +1,15 @@
 ﻿using Data;
 using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 
 namespace Business.Logic
 {
-    public class PrincipalUserData
+    public class LowerNodeData
     {
-        public PrincipalUser FillData(PrincipalUser principalUser)
+        public LowerNode FillData(LowerNode lowerNode)
         {
-            string storedProcedure  = "Negocio_GetData_Principal_User";
+            string storedProcedure  = "Negocio_GetData_Details_ByIdUser";
             Connection connection   = new Connection();
             SqlCommand sqlCommand   = new SqlCommand();
             sqlCommand.CommandText  = storedProcedure;
@@ -21,14 +20,14 @@ namespace Business.Logic
 
             SqlParameter paramIdUsuario     = new SqlParameter();
             paramIdUsuario.SqlDbType        = SqlDbType.NVarChar;
-            paramIdUsuario.ParameterName    = "@IdUsuario";
-            paramIdUsuario.Value            = principalUser.IdUsuario;
+            paramIdUsuario.ParameterName    = "@NodoSuperior";
+            paramIdUsuario.Value            = lowerNode.NodoSuperior;
             sqlCommand.Parameters.Add(paramIdUsuario);
             
             SqlParameter paramIdCategoria   = new SqlParameter();
             paramIdCategoria.SqlDbType      = SqlDbType.SmallInt;
             paramIdCategoria.ParameterName  = "@IdCategoria";
-            paramIdCategoria.Value          = principalUser.IdCategoria;
+            paramIdCategoria.Value          = lowerNode.IdCategoria;
             sqlCommand.Parameters.Add(paramIdCategoria);
             
             connection.Connect();
@@ -37,17 +36,16 @@ namespace Business.Logic
             {
                 while (reader.Read())
                 {
-                    principalUser.Nombres           = reader["Nombres"].ToString();
-                    principalUser.Apellidos         = reader["Apellidos"].ToString();
-                    principalUser.NombreCategoria   = reader["NombreCategoria"].ToString();
-                    principalUser.NombreNivel       = reader["NombreNivel"].ToString();
-                    principalUser.IdNivel           = Convert.ToInt16(reader["IdNivel"].ToString());
-                    principalUser.Cantidad          = Convert.ToInt16(reader["Cantidad"].ToString());
+                    lowerNode.Nombres           = reader["Nombres"].ToString();
+                    lowerNode.Apellidos         = reader["Apellidos"].ToString();
+                    lowerNode.NombreNivel       = reader["NombreNivel"].ToString();
+                    lowerNode.DineroAcumulado   = Convert.ToDecimal(reader["DineroAcumulado"].ToString());
+                    lowerNode.Cantidad          = Convert.ToInt16(reader["Cantidad"].ToString());
                 }
             }
             
             connection.Disconnect();
-            return principalUser;
+            return lowerNode;
         }
     }
 }

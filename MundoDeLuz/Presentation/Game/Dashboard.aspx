@@ -102,7 +102,9 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-tittle">Revisión de progreso para tus colaboradores</h5>
-                        <p>Actualmente tienes a 3</p>
+                        <p>Actualmente tienes a 
+                            <asp:Label ID="PUlblCantidadColaboradores2" runat="server" Text="Label"></asp:Label>
+                        </p>
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="card bg-success text-white">
@@ -111,15 +113,27 @@
                                         <table class="table">
                                             <tr>
                                                 <td><b>Nombres: </b></td>
-                                                <td>Sofía Ochoa de Romero</td>
+                                                <td>
+                                                    <asp:Label ID="LN1lblNombres" runat="server"></asp:Label>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td><b>Categoría: </b></td>
-                                                <td>Intermedio</td>
+                                                <td>
+                                                    <asp:Label ID="LN1lblCategoria" runat="server"></asp:Label>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td><b>Actual nivel: </b></td>
-                                                <td>1</td>
+                                                <td>
+                                                    <asp:Label ID="LN1lblActualNivel" runat="server"></asp:Label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><b>Colaboradores: </b></td>
+                                                <td>
+                                                    <asp:Label ID="LN1lblColaboradores" runat="server"></asp:Label>
+                                                </td>
                                             </tr>
                                         </table>
                                     </div>
@@ -132,15 +146,27 @@
                                         <table class="table">
                                             <tr>
                                                 <td><b>Nombres: </b></td>
-                                                <td>Rosario Herrera Huaranga</td>
+                                                <td>
+                                                    <asp:Label ID="LN2lblNombres" runat="server"></asp:Label>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td><b>Categoría: </b></td>
-                                                <td>Intermedio</td>
+                                                <td>
+                                                    <asp:Label ID="LN2lblCategoria" runat="server"></asp:Label>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td><b>Actual nivel: </b></td>
-                                                <td>1</td>
+                                                <td>
+                                                    <asp:Label ID="LN2lblActualNivel" runat="server"></asp:Label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><b>Colaboradores: </b></td>
+                                                <td>
+                                                    <asp:Label ID="LN2lblColaboradores" runat="server"></asp:Label>
+                                                </td>
                                             </tr>
                                         </table>
                                     </div>
@@ -156,15 +182,27 @@
                                         <table class="table">
                                             <tr>
                                                 <td><b>Nombres: </b></td>
-                                                <td>Luz Palomino Verástegui</td>
+                                                <td>
+                                                    <asp:Label ID="LN3lblNombres" runat="server"></asp:Label>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td><b>Categoría: </b></td>
-                                                <td>Básica</td>
+                                                <td>
+                                                    <asp:Label ID="LN3lblCategoria" runat="server"></asp:Label>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td><b>Actual nivel: </b></td>
-                                                <td>1</td>
+                                                <td>
+                                                    <asp:Label ID="LN3lblActualNivel" runat="server"></asp:Label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><b>Colaboradores: </b></td>
+                                                <td>
+                                                    <asp:Label ID="LN3lblColaboradores" runat="server"></asp:Label>
+                                                </td>
                                             </tr>
                                         </table>
                                     </div>
@@ -177,15 +215,27 @@
                                         <table class="table">
                                             <tr>
                                                 <td><b>Nombres: </b></td>
-                                                <td>Sin asignar</td>
+                                                <td>
+                                                    <asp:Label ID="LN4lblNombres" runat="server"></asp:Label>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td><b>Categoría: </b></td>
-                                                <td>Sin asignar</td>
+                                                <td>
+                                                    <asp:Label ID="LN4lblCategoria" runat="server"></asp:Label>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td><b>Actual nivel: </b></td>
-                                                <td>Sin asignar</td>
+                                                <td>
+                                                    <asp:Label ID="LN4lblActualNivel" runat="server"></asp:Label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><b>Colaboradores: </b></td>
+                                                <td>
+                                                    <asp:Label ID="LN4lblColaboradores" runat="server"></asp:Label>
+                                                </td>
                                             </tr>
                                         </table>
                                     </div>
@@ -201,15 +251,27 @@
                                         <table class="table">
                                             <tr>
                                                 <td><b>Nombres: </b></td>
-                                                <td>Sin asignar</td>
+                                                <td>
+                                                    <asp:Label ID="LN5lblNombres" runat="server"></asp:Label>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td><b>Categoría: </b></td>
-                                                <td>Sin asignar</td>
+                                                <td>
+                                                    <asp:Label ID="LN5lblCategoria" runat="server"></asp:Label>
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <td><b>Actual nivel: </b></td>
-                                                <td>Sin asignar</td>
+                                                <td>
+                                                    <asp:Label ID="LN5lblActualNivel" runat="server"></asp:Label>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><b>Colaboradores: </b></td>
+                                                <td>
+                                                    <asp:Label ID="LN5lblColaboradores" runat="server"></asp:Label>
+                                                </td>
                                             </tr>
                                         </table>
                                     </div>
