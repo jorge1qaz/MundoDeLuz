@@ -283,5 +283,10 @@
             </div>
         </div>
     </div>
-    <br />  
+    <br />
+
+    new 
+    <asp:TextBox ID="txtAddPartner" CssClass="form-control" runat="server"></asp:TextBox>
+
+
 </asp:Content>

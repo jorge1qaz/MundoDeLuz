@@ -31,13 +31,7 @@ namespace Data.CRUD
             paramIdCategoria.ParameterName  = "@IdCategoria";
             paramIdCategoria.Value          = IdCategoria;
             sqlCommand.Parameters.Add(paramIdCategoria);
-
-            SqlParameter paramAprobacion    = new SqlParameter();
-            paramAprobacion.SqlDbType       = SqlDbType.Bit;
-            paramAprobacion.ParameterName   = "@Aprobacion";
-            paramAprobacion.Value           = Aprobacion;
-            sqlCommand.Parameters.Add(paramAprobacion);
-
+            
             SqlParameter paramComprobacion  = new SqlParameter();
             paramComprobacion.Direction     = ParameterDirection.Output;
             paramComprobacion.SqlDbType     = SqlDbType.Bit;
