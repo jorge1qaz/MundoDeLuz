@@ -33,6 +33,16 @@ namespace MundoDeLuz
             // ready for production, use the build tool at https://modernizr.com to pick only the tests you need
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                             "~/Scripts/modernizr-*"));
+
+            bundles.Add(new ScriptBundle("~/bundles/owner").Include(
+                            "~/Scripts/jquery-3.3.1.js",
+                            "~/Scripts/bootstrap.js",
+                            "~/Scripts/bootstrap.bundle.js",
+                            "~/Scripts/jquery.validate.js",
+                            //"~/Scripts/popper.js",
+                            //"~/Scripts/popper-utils.js",
+                            "~/Scripts/additional-methods.js"
+                            ));
         }
     }
 }

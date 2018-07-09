@@ -110,11 +110,11 @@ namespace Data.CRUD
             connection.Disconnect();
             return bool.Parse(sqlCommand.Parameters["@Validation"].Value.ToString());
         }
-
-        public List<string> GetData_PrincipalUser()
+        
+        public Usuarios Read(string idUsuario)
         {
-            string storedProcedure  = "Negocio_GetData_Principal_User";
-            List<string> result     = new List<string>();
+            Usuarios usuarios = new Usuarios();
+            string storedProcedure  = "Negocio_GetData_User";
             Connection connection   = new Connection();
             SqlCommand sqlCommand   = new SqlCommand();
             sqlCommand.CommandText  = storedProcedure;
@@ -123,17 +123,11 @@ namespace Data.CRUD
 
             SqlDataAdapter sqlDataAdapter   = new SqlDataAdapter();
 
-            SqlParameter paramIdUsuario     = new SqlParameter();
-            paramIdUsuario.SqlDbType        = SqlDbType.NVarChar;
-            paramIdUsuario.ParameterName    = "@IdUsuario";
-            paramIdUsuario.Value            = IdUsuario;
-            sqlCommand.Parameters.Add(paramIdUsuario);
-            
-            SqlParameter paramIdCategoria   = new SqlParameter();
-            paramIdCategoria.SqlDbType      = SqlDbType.SmallInt;
-            paramIdCategoria.ParameterName  = "@IdCategoria";
-            paramIdCategoria.Value          = IdCategoria;
-            sqlCommand.Parameters.Add(paramIdCategoria);
+            SqlParameter parameter     = new SqlParameter();
+            parameter.SqlDbType        = SqlDbType.NVarChar;
+            parameter.ParameterName    = "@IdUsuario";
+            parameter.Value            = idUsuario;
+            sqlCommand.Parameters.Add(parameter);
             
             connection.Connect();
 
@@ -141,15 +135,16 @@ namespace Data.CRUD
             {
                 while (reader.Read())
                 {
-                    result.Add(reader.GetString(0).ToString());
-                    result.Add(reader.GetString(1).ToString());
-                    result.Add(reader.GetString(2).ToString());
-                    result.Add(reader.GetString(3).ToString());
+                    usuarios.IdUsuario  = reader["IdUsuario"].ToString();
+                    usuarios.Nombres    = reader["Nombres"].ToString();
+                    usuarios.Apellidos  = reader["Apellidos"].ToString();
+                    usuarios.NumeroTelefonico = reader["NumeroTelefonico"].ToString();
+
                 }
             }
             
             connection.Disconnect();
-            return result;
+            return usuarios;
         }
     }
 }

@@ -26,6 +26,30 @@ namespace Data
             return dataTable;
         }
 
+        public DataTable GetDataTable(string storedProcedure, string nameColumn1, Int16 id1)
+        {
+            DataTable dataTable             = new DataTable();
+            Connection connection           = new Connection();
+            SqlCommand sqlCommand           = new SqlCommand();
+            SqlDataAdapter sqlDataAdapter   = new SqlDataAdapter();
+            sqlCommand.CommandText          = storedProcedure;
+            sqlCommand.CommandType          = CommandType.StoredProcedure;
+            sqlCommand.Connection           = connection.connectionString;
+            sqlDataAdapter.SelectCommand    = sqlCommand;
+
+            SqlParameter parameter1     = new SqlParameter();
+            parameter1.SqlDbType        = SqlDbType.SmallInt;
+            parameter1.ParameterName    = nameColumn1;
+            parameter1.Value            = id1;
+
+            sqlCommand.Parameters.Add(parameter1);
+            connection.Connect();
+            sqlDataAdapter.Fill(dataTable);
+            connection.Disconnect();
+
+            return dataTable;
+        }
+
         public string GetSingleValueSTRINGById(string storedProcedure, string nameColumn, Int16 id)
         {
             string value = string.Empty;

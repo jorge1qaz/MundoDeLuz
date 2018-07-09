@@ -14,5 +14,11 @@ namespace Data
         public string IdUsuario { get; set; }
 
         public Int16 IdNivel { get; set; }
+
+        public decimal RecaudadoNivel1 { get; set; }
+
+        public decimal RecaudadoNivel2 { get; set; }
+
+        public decimal RecaudadoNivel3 { get; set; }
     }
 }

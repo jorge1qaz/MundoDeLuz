@@ -9,24 +9,29 @@ namespace MundoDeLuz.Presentation.Game
 {
     public partial class Dashboard : System.Web.UI.Page
     {
-        public Int16 idCategoria    = 1; // Cambiar
-        public string idUsuario     = "jricra@contasis.net"; // Cambiar 
+        public Int16 idCategoria;
+        public string idUsuario;
         public List<string>         principalIdsUsers;
         public List<LowerNode>      lowerNodes = new List<LowerNode>();
         public int conteoNodosinferiores;
         protected void Page_Load(object sender, EventArgs e)
         {
-            //idCategoria = Convert.ToInt16(Request.QueryString["categoria"]);
-            //idUsuario   = Session["idUsuario"].ToString();
-
-            string valor;
-            valor = string.Empty;
-            if (!Page.IsPostBack)
+            if (Request.QueryString["categoria"] == null || Session["idUsuario"] == null)
+                Response.Redirect("~/Presentation/General/Acceso.aspx", false);
+            else
             {
-                FillData_PrincipalUser();
-                Get_List_LowerNodes();
-                Fill_List_LowerNodes();
-                FillData_EachBox();
+                idCategoria = Convert.ToInt16(Request.QueryString["categoria"]);
+                idUsuario   = Session["idUsuario"].ToString();
+
+                string valor;
+                valor = string.Empty;
+                if (!Page.IsPostBack)
+                {
+                    FillData_PrincipalUser();
+                    Get_List_LowerNodes();
+                    Fill_List_LowerNodes();
+                    FillData_EachBox();
+                }
             }
         }
         public void FillData_PrincipalUser()
@@ -35,7 +40,7 @@ namespace MundoDeLuz.Presentation.Game
             {
                 #region Principal User
                 PrincipalUser user              = new PrincipalUser() {
-                    IdUsuario = idUsuario,
+                    IdUsuario   = idUsuario,
                     IdCategoria = idCategoria
                 };
                 PrincipalUserData principalUser = new PrincipalUserData();
@@ -59,16 +64,28 @@ namespace MundoDeLuz.Presentation.Game
 
                 PUlblSiguienteNivel.Text            = readGeneralData.GetSingleValueSTRINGById("Negocio_GetData_Level_Name", "@IdNivel", Convert.ToInt16(valueNextlevel));
 
-                PUlblCantidadColaboradores.Text     = Convert.ToString(readGeneralData.GetSingleValueINTById("Negocio_GetData_LowerNodes_ById", "@NodoSuperior", idUsuario)); // idUsuario obtenido previamente
-                PUlblCantidadColaboradores2.Text    = Convert.ToString(readGeneralData.GetSingleValueINTById("Negocio_GetData_LowerNodes_ById", "@NodoSuperior", idUsuario));
+                PUlblCantidadColaboradores.Text     = conteoNodosinferiores.ToString(); // idUsuario obtenido previamente
+                PUlblCantidadColaboradores2.Text    = conteoNodosinferiores.ToString();
 
                 GrlLblNombreNivel1.Text     = readGeneralData.GetSingleValueSTRINGById("Negocio_GetData_Level_Name", "@IdNivel", 1);
                 GrlLblNombreNivel2.Text     = readGeneralData.GetSingleValueSTRINGById("Negocio_GetData_Level_Name", "@IdNivel", 2);
                 GrlLblNombreNivel3.Text     = readGeneralData.GetSingleValueSTRINGById("Negocio_GetData_Level_Name", "@IdNivel", 3);
 
-                PULblGananciaNivel1.Text    = Convert.ToString(readGeneralData.GetSingleValueDECIMAL_3Ids("Negocio_GetData_Achievements_ByIdUser", "@NodoSuperior", idUsuario, "@IdNivel", 1, "@IdCategoria", idCategoria));
-                PULblGananciaNivel2.Text    = Convert.ToString(readGeneralData.GetSingleValueDECIMAL_3Ids("Negocio_GetData_Achievements_ByIdUser", "@NodoSuperior", idUsuario, "@IdNivel", 2, "@IdCategoria", idCategoria));
-                PULblGananciaNivel3.Text    = Convert.ToString(readGeneralData.GetSingleValueDECIMAL_3Ids("Negocio_GetData_Achievements_ByIdUser", "@NodoSuperior", idUsuario, "@IdNivel", 3, "@IdCategoria", idCategoria));
+                LowerNode lowerNode = new LowerNode() {
+                    NodoSuperior = idUsuario,
+                    NodoInferior = idUsuario,
+                    IdCategoria = idCategoria
+                };
+                LowerNodeData lowerNodeData = new LowerNodeData();
+                lowerNode = lowerNodeData.FillData(lowerNode, "Negocio_Read_Principal_Node");
+
+                PULblGananciaNivel1.Text = lowerNode.RecaudadoNivel1.ToString();
+                PULblGananciaNivel2.Text = lowerNode.RecaudadoNivel2.ToString();
+                PULblGananciaNivel3.Text = lowerNode.RecaudadoNivel3.ToString();
+
+                //PULblGananciaNivel1.Text    = Convert.ToString(readGeneralData.GetSingleValueDECIMAL_3Ids("Negocio_GetData_Achievements_ByIdUser", "@NodoSuperior", idUsuario, "@IdNivel", 1, "@IdCategoria", idCategoria));
+                //PULblGananciaNivel2.Text    = Convert.ToString(readGeneralData.GetSingleValueDECIMAL_3Ids("Negocio_GetData_Achievements_ByIdUser", "@NodoSuperior", idUsuario, "@IdNivel", 2, "@IdCategoria", idCategoria));
+                //PULblGananciaNivel3.Text    = Convert.ToString(readGeneralData.GetSingleValueDECIMAL_3Ids("Negocio_GetData_Achievements_ByIdUser", "@NodoSuperior", idUsuario, "@IdNivel", 3, "@IdCategoria", idCategoria));
 
                 #endregion Principal User Status
 
@@ -84,12 +101,13 @@ namespace MundoDeLuz.Presentation.Game
         {
             LowerNode lowerNode = new LowerNode()
             {
-                NodoSuperior = idNodoInferior,
+                NodoSuperior = idUsuario,
+                NodoInferior = idNodoInferior,
                 IdCategoria = idCategoria
             };
 
             LowerNodeData lowerNodeData = new LowerNodeData();
-            lowerNode = lowerNodeData.FillData(lowerNode);
+            lowerNode = lowerNodeData.FillData(lowerNode, "Negocio_Read_Node");
 
             return lowerNode;
         }
@@ -119,7 +137,9 @@ namespace MundoDeLuz.Presentation.Game
         {
             try
             {
-                switch (principalIdsUsers.Count)
+                ReadGeneralData readGeneralData = new ReadGeneralData();
+                string nombreCategoria = readGeneralData.GetSingleValueSTRINGById("Negocio_GetData_Categoria_Name", "@NombreCategoria", idCategoria);
+                switch (conteoNodosinferiores)
                 {
                     case 0:
                         // No existe ningún miembro
@@ -128,67 +148,82 @@ namespace MundoDeLuz.Presentation.Game
                         LN1lblNombres.Text          = lowerNodes[0].Nombres;
                         LN1lblActualNivel.Text      = lowerNodes[0].NombreNivel;
                         LN1lblColaboradores.Text    = lowerNodes[0].Cantidad.ToString();
+                        LN1lblCategoria.Text        = nombreCategoria;          
                         break;
                     case 2:
                         LN1lblNombres.Text          = lowerNodes[0].Nombres;
                         LN1lblActualNivel.Text      = lowerNodes[0].NombreNivel;
                         LN1lblColaboradores.Text    = lowerNodes[0].Cantidad.ToString();
+                        LN1lblCategoria.Text        = nombreCategoria;
 
                         LN2lblNombres.Text          = lowerNodes[1].Nombres;
                         LN2lblActualNivel.Text      = lowerNodes[1].NombreNivel;
                         LN2lblColaboradores.Text    = lowerNodes[1].Cantidad.ToString();
+                        LN2lblCategoria.Text        = nombreCategoria;
                         break;
                     case 3:
                         LN1lblNombres.Text          = lowerNodes[0].Nombres;
                         LN1lblActualNivel.Text      = lowerNodes[0].NombreNivel;
                         LN1lblColaboradores.Text    = lowerNodes[0].Cantidad.ToString();
+                        LN1lblCategoria.Text        = nombreCategoria;
 
                         LN2lblNombres.Text          = lowerNodes[1].Nombres;
                         LN2lblActualNivel.Text      = lowerNodes[1].NombreNivel;
                         LN2lblColaboradores.Text    = lowerNodes[1].Cantidad.ToString();
+                        LN2lblCategoria.Text        = nombreCategoria;
 
                         LN3lblNombres.Text          = lowerNodes[2].Nombres;
                         LN3lblActualNivel.Text      = lowerNodes[2].NombreNivel;
                         LN3lblColaboradores.Text    = lowerNodes[2].Cantidad.ToString();
+                        LN3lblCategoria.Text        = nombreCategoria;
                         break;
                     case 4:
                         LN1lblNombres.Text          = lowerNodes[0].Nombres;
                         LN1lblActualNivel.Text      = lowerNodes[0].NombreNivel;
                         LN1lblColaboradores.Text    = lowerNodes[0].Cantidad.ToString();
+                        LN1lblCategoria.Text        = nombreCategoria;
 
                         LN2lblNombres.Text          = lowerNodes[1].Nombres;
                         LN2lblActualNivel.Text      = lowerNodes[1].NombreNivel;
                         LN2lblColaboradores.Text    = lowerNodes[1].Cantidad.ToString();
+                        LN2lblCategoria.Text        = nombreCategoria;
 
                         LN3lblNombres.Text          = lowerNodes[2].Nombres;
                         LN3lblActualNivel.Text      = lowerNodes[2].NombreNivel;
                         LN3lblColaboradores.Text    = lowerNodes[2].Cantidad.ToString();
+                        LN3lblCategoria.Text        = nombreCategoria;
 
                         LN4lblNombres.Text          = lowerNodes[3].Nombres;
                         LN4lblActualNivel.Text      = lowerNodes[3].NombreNivel;
                         LN4lblColaboradores.Text    = lowerNodes[3].Cantidad.ToString();
+                        LN4lblCategoria.Text        = nombreCategoria;
                         break;
 
                     case 5:
                         LN1lblNombres.Text          = lowerNodes[0].Nombres;
                         LN1lblActualNivel.Text      = lowerNodes[0].NombreNivel;
                         LN1lblColaboradores.Text    = lowerNodes[0].Cantidad.ToString();
+                        LN1lblCategoria.Text        = nombreCategoria;
 
                         LN2lblNombres.Text          = lowerNodes[1].Nombres;
                         LN2lblActualNivel.Text      = lowerNodes[1].NombreNivel;
                         LN2lblColaboradores.Text    = lowerNodes[1].Cantidad.ToString();
+                        LN2lblCategoria.Text        = nombreCategoria;
 
                         LN3lblNombres.Text          = lowerNodes[2].Nombres;
                         LN3lblActualNivel.Text      = lowerNodes[2].NombreNivel;
                         LN3lblColaboradores.Text    = lowerNodes[2].Cantidad.ToString();
+                        LN3lblCategoria.Text        = nombreCategoria;
 
                         LN4lblNombres.Text          = lowerNodes[3].Nombres;
                         LN4lblActualNivel.Text      = lowerNodes[3].NombreNivel;
                         LN4lblColaboradores.Text    = lowerNodes[3].Cantidad.ToString();
+                        LN4lblCategoria.Text        = nombreCategoria;
 
                         LN5lblNombres.Text          = lowerNodes[4].Nombres;
                         LN5lblActualNivel.Text      = lowerNodes[4].NombreNivel;
                         LN5lblColaboradores.Text    = lowerNodes[4].Cantidad.ToString();
+                        LN5lblCategoria.Text        = nombreCategoria;
                         break;
                 }
             }
@@ -211,6 +246,22 @@ namespace MundoDeLuz.Presentation.Game
                 Response.Redirect("~/Presentation/Messages/Success.aspx?typeMessage=1", false); // indicar 
             else
                 Response.Redirect("~/Presentation/Messages/Error.aspx?typeMessage=1", false);
+        }
+
+        protected void Event_AddNewPartner(object sender, EventArgs e)
+        {
+            Progress progress = new Progress() {
+                NodoSuperior    = idUsuario,
+                NodoInferior    = txtAddPartner.Text.ToString().ToLower(),
+                IdCategoria     = idCategoria
+            };
+            if (progress.CreateProgress())
+            {
+                Response.Write("<script>alert('Miembro agregado con éxito.');</script>");
+                Response.Redirect("~/Presentation/Game/Dashboard.aspx?categoria=" + idCategoria, false);
+            }
+            else
+                Response.Write("<script>alert('No se puede agregar al miembro, verfique si ya lo agregó.');</script>");
         }
     }
 }

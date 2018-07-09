@@ -7,7 +7,8 @@ namespace MundoDeLuz.Presentation.General
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if ((string)Session["idUsuario"] != null)
+                Session.Remove("idUsuario");
         }
 
         protected void Event_AuthenticateUser(object sender, EventArgs e)
@@ -21,7 +22,10 @@ namespace MundoDeLuz.Presentation.General
                 };
 
                 if (usuario.AuthenticateUser())
-                    Response.Redirect("~/Presentation/Game/Dashboard.aspx", false);
+                {
+                    Session["idUsuario"] = txtIdUsuario.Text.ToString().Trim().ToLower();
+                    Response.Redirect("~/Presentation/Game/EleccionCategoria.aspx", false);
+                }
                 else
                     Response.Write("<script>alert('Datos incorrectos!');</script>");
             }

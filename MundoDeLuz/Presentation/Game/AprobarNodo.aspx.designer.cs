@@ -10,15 +10,15 @@
 namespace MundoDeLuz.Presentation.Game {
     
     
-    public partial class EleccionCategoria {
+    public partial class AprobarNodo {
         
         /// <summary>
-        /// boxAprobarMiembro control.
+        /// dlstAprobarMiembro control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl boxAprobarMiembro;
+        protected global::System.Web.UI.WebControls.DataList dlstAprobarMiembro;
     }
 }

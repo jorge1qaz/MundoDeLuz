@@ -7,6 +7,8 @@ namespace Business
     {
         public string NodoSuperior { get; set; }
 
+        public string NodoInferior { get; set; }
+
         public Int16 IdCategoria { get; set; }
 
         public string Nombres { get; set; }
@@ -18,5 +20,11 @@ namespace Business
         public decimal DineroAcumulado { get; set; }
 
         public Int16 Cantidad { get; set; }
+
+        public decimal RecaudadoNivel1 { get; set; }
+
+        public decimal RecaudadoNivel2 { get; set; }
+
+        public decimal RecaudadoNivel3 { get; set; }
     }
 }

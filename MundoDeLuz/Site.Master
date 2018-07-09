@@ -6,10 +6,13 @@
 <head runat="server">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%: Page.Title %> - My ASP.NET Application</title>
+    <title>Mundo de Luz | <%: Page.Title %></title>
 
     <asp:PlaceHolder runat="server">
+        <%: Scripts.Render("~/bundles/WebFormsJs") %>
+        <%: Scripts.Render("~/bundles/MsAjaxJs") %>
         <%: Scripts.Render("~/bundles/modernizr") %>
+        <%: Scripts.Render("~/bundles/owner") %>
     </asp:PlaceHolder>
 
     <webopt:BundleReference runat="server" Path="~/Content/css" />
@@ -39,12 +42,12 @@
         </asp:ScriptManager>
 
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="./PT-001.html">Iniciar sesión</a>
+            <a href="~/Presentation/General/Acceso.aspx" runat="server" class="navbar-brand">Iniciar sesión</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" datatarget="#navbarSupportedContent" aria-controls="navbarSupportedContent" ariaexpanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item"><a class="nav-link" href="./PT-002.html"><span>| Registro de nuevo miembro |</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="./PT-003.html"><span>Ver progresos  |</span></a></li>
+                    <%--<li class="nav-item"><a class="nav-link" href="./PT-002.html"><span>| Registro de nuevo miembro |</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="./PT-003.html"><span>Ver progresos  |</span></a></li>--%>
                 </ul>
             </div>
         </nav>
@@ -54,7 +57,11 @@
             </asp:ContentPlaceHolder>
             <hr />
             <footer>
-                <p>&copy; <%: DateTime.Now.Year %> - My ASP.NET Application</p>
+                <p>
+                    &copy; <%: DateTime.Now.Year %> - Mundo de Luz
+                <em class="float-right">Creado por
+                    <a href="javascript: void(0)"> Agnes Technology</a></em>
+                </p>
             </footer>
         </div>
 

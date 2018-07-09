@@ -7,9 +7,8 @@ namespace Business.Logic
 {
     public class LowerNodeData
     {
-        public LowerNode FillData(LowerNode lowerNode)
+        public LowerNode FillData(LowerNode lowerNode, string storedProcedure)
         {
-            string storedProcedure  = "Negocio_GetData_Details_ByIdUser";
             Connection connection   = new Connection();
             SqlCommand sqlCommand   = new SqlCommand();
             sqlCommand.CommandText  = storedProcedure;
@@ -23,6 +22,12 @@ namespace Business.Logic
             paramIdUsuario.ParameterName    = "@NodoSuperior";
             paramIdUsuario.Value            = lowerNode.NodoSuperior;
             sqlCommand.Parameters.Add(paramIdUsuario);
+
+            SqlParameter paramNodoInferior     = new SqlParameter();
+            paramNodoInferior.SqlDbType        = SqlDbType.NVarChar;
+            paramNodoInferior.ParameterName    = "@NodoInferior";
+            paramNodoInferior.Value            = lowerNode.NodoInferior;
+            sqlCommand.Parameters.Add(paramNodoInferior);
             
             SqlParameter paramIdCategoria   = new SqlParameter();
             paramIdCategoria.SqlDbType      = SqlDbType.SmallInt;
@@ -37,10 +42,11 @@ namespace Business.Logic
                 while (reader.Read())
                 {
                     lowerNode.Nombres           = reader["Nombres"].ToString();
-                    lowerNode.Apellidos         = reader["Apellidos"].ToString();
-                    lowerNode.NombreNivel       = reader["NombreNivel"].ToString();
-                    lowerNode.DineroAcumulado   = Convert.ToDecimal(reader["DineroAcumulado"].ToString());
                     lowerNode.Cantidad          = Convert.ToInt16(reader["Cantidad"].ToString());
+                    lowerNode.NombreNivel       = reader["NombreNivel"].ToString();
+                    lowerNode.RecaudadoNivel1   = Convert.ToDecimal(reader["RecaudadoNivel1"].ToString());
+                    lowerNode.RecaudadoNivel2   = Convert.ToDecimal(reader["RecaudadoNivel2"].ToString());
+                    lowerNode.RecaudadoNivel3   = Convert.ToDecimal(reader["RecaudadoNivel3"].ToString());
                 }
             }
             

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Dashboard.aspx.cs" Inherits="MundoDeLuz.Presentation.Game.Dashboard" %>
+﻿<%@ Page Title="Dashboard" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Dashboard.aspx.cs" Inherits="MundoDeLuz.Presentation.Game.Dashboard" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <div class="container">
@@ -9,7 +9,7 @@
                         <h5 class="card-tittle">Revisión de progreso</h5>
                         <div class="row">
                             <div class="col-sm-6">
-                                <div class="card bg-info text-white">
+                                <div class="card bg-light">
                                     <div class="card-body">
                                         <h5 class="card-tittle">Miembro</h5>
                                         <table class="table">
@@ -97,17 +97,26 @@
             </div>
         </div>
         <br />
+
         <div class="row">
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-tittle">Revisión de progreso para tus colaboradores</h5>
-                        <p>Actualmente tienes a 
+                        <div class="row">
+                            <div class="col-md-9 col-sm-12">
+                                <h5 class="card-tittle">Revisión de progreso para tus colaboradores</h5>
+                            </div>
+                            <div class="col-md-3 col-sm-12 text-center">
+                                <button class="btn btn-info" type="button" id="btnTriggerPartner" data-toggle="modal" data-target="modalNewPartner">Agregar miembro</button>
+                            </div>
+                        </div>
+                        <p>
+                            Actualmente tienes a 
                             <asp:Label ID="PUlblCantidadColaboradores2" runat="server" Text="Label"></asp:Label>
                         </p>
                         <div class="row">
-                            <div class="col-sm-6">
-                                <div class="card bg-success text-white">
+                            <div class="col-sm-4">
+                                <div class="card">
                                     <div class="card-body">
                                         <h5 class="card-tittle">Miembro</h5>
                                         <table class="table">
@@ -139,8 +148,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-6">
-                                <div class="card bg-success text-white">
+                            <div class="col-sm-4">
+                                <div class="card">
                                     <div class="card-body">
                                         <h5 class="card-tittle">Miembro</h5>
                                         <table class="table">
@@ -172,11 +181,8 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <br />
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="card bg-success text-white">
+                            <div class="col-sm-4">
+                                <div class="card">
                                     <div class="card-body">
                                         <h5 class="card-tittle">Miembro</h5>
                                         <table class="table">
@@ -208,8 +214,11 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-6">
-                                <div class="card bg-success text-white">
+                        </div>
+                        <br />
+                        <div class="row">
+                            <div class="offset-sm-2 col-sm-4">
+                                <div class="card">
                                     <div class="card-body">
                                         <h5 class="card-tittle">Miembro</h5>
                                         <table class="table">
@@ -241,11 +250,8 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <br />
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="card bg-success text-white">
+                            <div class="col-sm-4">
+                                <div class="card">
                                     <div class="card-body">
                                         <h5 class="card-tittle">Miembro</h5>
                                         <table class="table">
@@ -282,11 +288,45 @@
                 </div>
             </div>
         </div>
+        
+        <div class="modal fade bd-example-modal-sm" id="modalNewPartner" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Registro</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="card card-outline-secondary">
+                            <div class="card-block bg-faded">
+                                <div class="card-body">
+                                    <label class="font-weight-bold">Registre un nuevo miembro</label>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-md-8 col-sm-12">
+                                                <asp:TextBox CssClass="form-control" ID="txtAddPartner" runat="server" AutoCompleteType="Email" placeholder="Ingrese el correo electrónico del nuevo miembro"></asp:TextBox>
+                                            </div>
+                                            <div class="col-md-4 col-sm-12">
+                                                <asp:Button ID="btnAddPartner" CssClass="btn btn-success form-control" runat="server" Text="Aceptar" OnClick="Event_AddNewPartner" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <br />
-
-    new 
-    <asp:TextBox ID="txtAddPartner" CssClass="form-control" runat="server"></asp:TextBox>
-
-
+    <script>
+        $("#btnTriggerPartner").click(function () {
+            $("#modalNewPartner").modal("show");
+        });
+    </script>
 </asp:Content>
